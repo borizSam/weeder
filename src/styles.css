@@ -716,49 +716,170 @@ body {
 
 /* ============================================================
    PIE DE PÁGINA — responsabilidad: Edgar
+
+   Una sola columna centrada y compacta. Estructura:
+
+     .footer              → contenedor + fondo oscuro
+       ├─ .footer-glow    → halo de portal giratorio
+       └─ .footer-inner   → contenido visible (logo, tagline,
+       │                    redes, contacto)
+       └─ .footer-bottom  → barra con copyright + disclaimer
+
+   PALETA USADA (definida en :root):
+     --space-bg      fondo principal del sitio
+     --portal-green  verde neón (borde superior, logo, links)
+     --rick-blue     azul Rick
+     --alien-pink    rosa alien
+     --morty-yellow  amarillo Morty
+     --card-bg       fondo de tarjetas (también para iconos)
+     --text-muted    texto secundario
+     --white         texto principal
+
+   CÓMO EDITAR:
+     - Cambiar intensidad del halo → variable --footer-halo-opacity
+     - Cambiar espacio vertical    → variable --footer-padding-y
+     - Cambiar tamaño del logo     → .footer-logo { font-size }
+     - Añadir redes sociales       → añadir <li> en el HTML
    ============================================================ */
+:root {
+  /* Variables locales del footer: ajústalas aquí para cambiar
+     el conjunto sin tocar cada selector. */
+  --footer-padding-y:    28px;     /* espacio vertical (compacto) */
+  --footer-gap:          10px;     /* separación entre elementos */
+  --footer-halo-size:    500px;    /* tamaño del halo giratorio */
+  --footer-halo-opacity: 0.10;     /* intensidad del halo (baja) */
+  --footer-max-width:    520px;    /* ancho del contenido centrado */
+}
+
+/* ---------- Contenedor principal del footer ---------- */
 .footer {
   position: relative;
   z-index: 1;
+  padding: var(--footer-padding-y) 20px 14px;   /* compacto */
+  background: linear-gradient(180deg, #0a0a1c 0%, #050510 100%);
+  border-top: 2px solid var(--portal-green);
+  overflow: hidden;       /* recorta el halo que sobresale por arriba */
   text-align: center;
-  padding: 40px 20px;
-  border-top: 3px solid var(--portal-green);
-  background: rgba(0, 0, 0, 0.6);
 }
 
-/* Bloque de información de contacto (<address> en el HTML) */
+/* ---------- Halo decorativo: gradiente cónico giratorio ----------
+   position: absolute  → sale del flujo, no ocupa espacio vertical
+   top negativo        → asoma por encima del footer
+   blur alto + opacidad baja → queda como un brillo suave
+   animation: spin     → rota lento (reutiliza @keyframes del hero) */
+.footer-glow {
+  position: absolute;
+  left: 50%;
+  top: -200px;
+  transform: translateX(-50%);
+  width: var(--footer-halo-size);
+  height: var(--footer-halo-size);
+  background: conic-gradient(
+    from 0deg,
+    var(--portal-green),
+    var(--rick-blue),
+    var(--alien-pink),
+    var(--morty-yellow),
+    var(--portal-green)
+  );
+  filter: blur(100px);
+  opacity: var(--footer-halo-opacity);
+  animation: spin 22s linear infinite;
+  pointer-events: none;   /* no bloquea clics */
+}
+
+/* ---------- Contenido visible (una sola columna) ----------
+   flex + align-items: center → todo centrado vertical y horizontalmente
+   gap uniforme entre hijos   → separación controlada y compacta */
+.footer-inner {
+  position: relative;       /* por encima del halo */
+  z-index: 2;
+  max-width: var(--footer-max-width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--footer-gap);
+}
+
+/* ---------- Logo de la marca ----------
+   Misma estética que el logo del navbar (Bangers + glow verde),
+   pero más pequeño para no dominar el footer. */
+.footer-logo {
+  font-family: var(--font-head);
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+  color: var(--portal-green);
+  text-shadow: 0 0 6px rgba(0, 230, 118, 0.5);
+  -webkit-text-stroke: 1px #000;
+  margin: 0;                /* el gap del .footer-inner ya lo separa */
+}
+
+/* ---------- Eslogan ----------
+   Cursiva suave y color muted para no competir con el logo */
+.footer-tagline {
+  color: var(--text-muted);
+  font-style: italic;
+  font-size: 0.88rem;
+  line-height: 1.4;
+  margin: 0;
+  max-width: 380px;
+}
+
+
+/* ---------- Bloque de contacto ----------
+   <address> es italic por defecto → lo reseteamos */
 .footer-contact {
-  font-style: normal;   /* <address> es italic por defecto; lo reseteamos */
-  margin-bottom: 16px;
+  font-style: normal;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;                /* líneas muy juntas */
+  margin: 0;
 }
 
 .footer-contact p {
   color: var(--text-muted);
-  font-size: 0.9rem;
-  margin-bottom: 4px;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin: 0;
 }
 
-/* Enlace de email dentro del footer */
+/* Enlace de contacto: verde portal discreto, brillo suave al hover */
 .footer-link {
   color: var(--portal-green);
   text-decoration: none;
+  transition: text-shadow 0.2s;
 }
-
 .footer-link:hover {
   text-decoration: underline;
+  text-shadow: 0 0 6px rgba(0, 230, 118, 0.5);
 }
 
-.footer p {
+/* ---------- Barra inferior ----------
+   Separada del contenido por una línea sutil semitransparente.
+   max-width igual al .footer-inner para que queden alineados. */
+.footer-bottom {
+  position: relative;
+  z-index: 2;
+  max-width: var(--footer-max-width);
+  margin: 14px auto 0;     /* espacio respecto al contenido superior */
+  padding-top: 10px;
+  border-top: 1px solid rgba(136, 136, 187, 0.2);
+}
+
+.footer-copy {
   color: var(--text-muted);
-  font-size: 0.9rem;
-  margin-bottom: 6px;
+  font-size: 0.8rem;
+  margin: 0 0 2px;
 }
+.footer-copy strong { color: var(--portal-green); }
 
-/* Nota legal / disclaimer en tamaño más pequeño y semitransparente */
 .footer-sub {
-  font-size: 0.78rem !important;
-  opacity: 0.5;
+  font-size: 0.72rem;
+  color: var(--text-muted);
   font-style: italic;
+  opacity: 0.55;
+  margin: 0;
 }
 
 
@@ -815,6 +936,9 @@ body {
   .about-stats { justify-content: center; }
 
   .stat { min-width: 110px; padding: 14px 18px; }
+
+  /* Footer: padding reducido en tablet */
+  .footer { padding: 24px 20px 12px; }
 }
 
 @media (max-width: 480px) {
