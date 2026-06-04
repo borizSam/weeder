@@ -1,51 +1,86 @@
 /* ============================================================
-   WILDER WORLD — Rick & Morty / Alien Cartoon Theme
+   WEED WORLD — Rick & Morty / Alien Cartoon Theme
+   Paleta oscura con acentos neón: verde portal, azul Rick,
+   amarillo Morty, rosa alien y morado cósmico.
    ============================================================ */
 
-/* ---------- Variables ---------- */
+
+/* ============================================================
+   VARIABLES GLOBALES
+   Centralizadas aquí para cambiar toda la paleta desde un
+   solo sitio. Usa var(--nombre) en el resto del CSS.
+   ============================================================ */
 :root {
-  --portal-green: #00e676;
-  --portal-glow:  #00ff88;
-  --space-bg:     #06060f;
-  --card-bg:      #10102a;
-  --card-border:  #1e1e4a;
-  --rick-blue:    #00cfff;
-  --morty-yellow: #ffe135;
-  --alien-pink:   #ff4dff;
-  --cosmic-purple:#7c3aed;
-  --neon-orange:  #ff6b00;
-  --white:        #f0f0ff;
-  --text-muted:   #8888bb;
-  --outline:      3px solid #000;
-  --radius-card:  20px;
-  --font-head:    'Bangers', cursive;
-  --font-body:    'Nunito', sans-serif;
+  /* Colores principales de marca */
+  --portal-green:  #00e676;   /* verde neón del portal de Rick */
+  --portal-glow:   #00ff88;   /* versión más brillante para hover */
+  --space-bg:      #06060f;   /* negro espacial del fondo */
+  --card-bg:       #10102a;   /* fondo de tarjetas */
+  --card-border:   #1e1e4a;   /* borde sutil de tarjetas */
+
+  /* Colores de acento inspirados en la serie */
+  --rick-blue:     #00cfff;
+  --morty-yellow:  #ffe135;
+  --alien-pink:    #ff4dff;
+  --cosmic-purple: #7c3aed;
+  --neon-orange:   #ff6b00;
+
+  /* Colores de texto */
+  --white:         #f0f0ff;   /* blanco ligeramente azulado */
+  --text-muted:    #8888bb;   /* texto secundario / subtítulos */
+
+  /* Utilidades de diseño */
+  --outline:       3px solid #000;
+  --radius-card:   20px;
+
+  /* Tipografías — instaladas desde Google Fonts */
+  --font-head:     'Bangers', cursive;    /* títulos estilo cómic */
+  --font-body:     'Nunito', sans-serif;  /* cuerpo legible y amigable */
 }
 
-/* ---------- Reset ---------- */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+
+/* ============================================================
+   RESET BÁSICO
+   Elimina márgenes y paddings por defecto del navegador.
+   box-sizing: border-box hace que el padding no sume al ancho.
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Desplazamiento suave al hacer clic en anclas (#sección) */
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   background: var(--space-bg);
   color: var(--white);
   font-family: var(--font-body);
   font-size: 16px;
-  overflow-x: hidden;
-  position: relative;
+  overflow-x: hidden;   /* evita scroll horizontal por elementos desbordados */
+  position: relative;   /* necesario para que los pseudo-elementos fixed funcionen */
 }
 
+
 /* ============================================================
-   STARS BACKGROUND
+   FONDO DE ESTRELLAS
+   Dos capas de radial-gradient simulan estrellas a distinta
+   profundidad. position: fixed las mantiene estáticas al
+   hacer scroll. aria-hidden="true" en el HTML las oculta
+   a lectores de pantalla.
    ============================================================ */
 .stars,
 .stars2 {
   position: fixed;
   inset: 0;
-  pointer-events: none;
+  pointer-events: none;   /* no interceptan clics del usuario */
   z-index: 0;
 }
 
+/* Capa de estrellas principal: más densa, colores variados */
 .stars {
   background: transparent
     radial-gradient(1px 1px at 10% 15%, #fff 0%, transparent 100%),
@@ -63,6 +98,7 @@ body {
   animation: twinkle 4s infinite alternate;
 }
 
+/* Capa secundaria: menos estrellas, distinto ritmo para efecto de profundidad */
 .stars2 {
   background: transparent
     radial-gradient(1px 1px at 22% 22%, #fdf 0%, transparent 100%),
@@ -71,21 +107,25 @@ body {
     radial-gradient(1px 1px at 88% 88%, #ffe 0%, transparent 100%),
     radial-gradient(1px 1px at 14% 88%, #fff 0%, transparent 100%),
     radial-gradient(2px 2px at 60% 10%, #aef 0%, transparent 100%);
-  animation: twinkle 6s 1s infinite alternate;
+  animation: twinkle 6s 1s infinite alternate;   /* desfase de 1s respecto a .stars */
 }
 
+/* Parpadeo suave de estrellas: alterna opacidad entre 0.6 y 1 */
 @keyframes twinkle {
   0%   { opacity: 0.6; }
   100% { opacity: 1; }
 }
 
+
 /* ============================================================
-   NAVBAR
+   BARRA DE NAVEGACIÓN — responsabilidad: Boris
+   sticky: permanece visible al hacer scroll.
+   backdrop-filter: blur da efecto de cristal esmerilado.
    ============================================================ */
 .navbar {
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 100;   /* por encima de todo el contenido de la página */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -93,19 +133,45 @@ body {
   background: rgba(6, 6, 15, 0.85);
   backdrop-filter: blur(12px);
   border-bottom: 3px solid var(--portal-green);
-  box-shadow: 0 0 20px rgba(0, 230, 118, 0.3);
+  box-shadow: 0 0 20px rgba(0, 230, 118, 0.3);   /* halo verde bajo la barra */
 }
 
+/* Logotipo: tipografía de títulos, color verde neón con doble brillo */
 .nav-logo {
   font-family: var(--font-head);
   font-size: 2rem;
   letter-spacing: 2px;
   color: var(--portal-green);
   text-shadow: 0 0 12px var(--portal-green), 0 0 30px var(--portal-green);
-  -webkit-text-stroke: 1px #000;
+  -webkit-text-stroke: 1px #000;   /* contorno negro estilo cómic */
   text-decoration: none;
 }
 
+/* Lista de enlaces de navegación: horizontal, sin viñetas */
+.nav-links {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Cada enlace de navegación */
+.nav-link {
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  letter-spacing: 1.5px;
+  color: var(--white);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  color: var(--portal-green);
+  text-shadow: 0 0 8px var(--portal-green);
+}
+
+/* Eslogan en cursiva a la derecha de la barra */
 .nav-tagline {
   font-size: 0.85rem;
   color: var(--text-muted);
@@ -114,8 +180,11 @@ body {
   text-align: right;
 }
 
+
 /* ============================================================
-   HERO
+   SECCIÓN HERO — responsabilidad: Boris
+   Portada del sitio: ocupa casi toda la pantalla (90vh).
+   El alienígena y el anillo de portal son CSS puro.
    ============================================================ */
 .hero {
   position: relative;
@@ -129,7 +198,7 @@ body {
   text-align: center;
 }
 
-/* Portal ring decoration */
+/* Anillo de portal: gradiente cónico girado en bucle */
 .portal-ring {
   position: absolute;
   width: 520px;
@@ -143,21 +212,24 @@ body {
     var(--morty-yellow),
     var(--portal-green)
   );
-  filter: blur(60px);
+  filter: blur(60px);   /* desenfoque para efecto de halo suave */
   opacity: 0.18;
   animation: spin 8s linear infinite;
   pointer-events: none;
 }
 
+/* Rotación continua del anillo */
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
 
+/* Contenedor del texto central del hero */
 .hero-content {
   position: relative;
   max-width: 780px;
 }
 
+/* Etiqueta flotante sobre el título */
 .hero-badge {
   display: inline-block;
   background: var(--portal-green);
@@ -168,11 +240,12 @@ body {
   padding: 6px 18px;
   border-radius: 30px;
   border: 3px solid #000;
-  box-shadow: 4px 4px 0 #000;
+  box-shadow: 4px 4px 0 #000;   /* sombra desplazada estilo cómic */
   margin-bottom: 24px;
   animation: float 3s ease-in-out infinite;
 }
 
+/* Título principal h1: tamaño fluido entre 2.8rem y 5rem según viewport */
 .hero-title {
   font-family: var(--font-head);
   font-size: clamp(2.8rem, 6vw, 5rem);
@@ -187,6 +260,7 @@ body {
   margin-bottom: 20px;
 }
 
+/* Subtítulo descriptivo bajo el h1 */
 .hero-subtitle {
   font-size: 1.2rem;
   color: var(--text-muted);
@@ -195,15 +269,16 @@ body {
   margin: 0 auto 36px;
 }
 
-/* Cartoon alien character in hero */
+/* Alienígena decorativo — posición absoluta en esquina inferior derecha */
 .hero-alien {
   position: absolute;
   right: 60px;
   bottom: 40px;
-  animation: float 4s 0.5s ease-in-out infinite;
+  animation: float 4s 0.5s ease-in-out infinite;   /* desfase de 0.5s respecto al badge */
   pointer-events: none;
 }
 
+/* Cabeza del alienígena: óvalo verde con borde negro */
 .alien-head {
   width: 80px;
   height: 100px;
@@ -214,6 +289,7 @@ body {
   box-shadow: 4px 4px 0 #000;
 }
 
+/* Ojos del alienígena: elipses negras */
 .alien-eye {
   position: absolute;
   width: 26px;
@@ -225,6 +301,7 @@ body {
 .alien-eye.left  { left: 10px; }
 .alien-eye.right { right: 10px; }
 
+/* Reflejo del ojo: punto azul que da sensación de brillo */
 .alien-eye::after {
   content: '';
   position: absolute;
@@ -236,6 +313,7 @@ body {
   left: 6px;
 }
 
+/* Boca del alienígena: media elipse con borde inferior */
 .alien-mouth {
   position: absolute;
   width: 30px;
@@ -249,8 +327,11 @@ body {
   background: #003d1e;
 }
 
+
 /* ============================================================
-   BUTTONS
+   BOTONES — estilos compartidos
+   Estilo "flat design" con sombra desplazada tipo cómic.
+   El efecto :active simula que el botón se hunde al pulsarlo.
    ============================================================ */
 .btn {
   display: inline-block;
@@ -266,11 +347,13 @@ body {
   box-shadow: 4px 4px 0 #000;
 }
 
+/* Efecto de "hundirse" al pulsar: desplazamos el elemento hacia la sombra */
 .btn:active {
   transform: translate(2px, 2px);
   box-shadow: 2px 2px 0 #000;
 }
 
+/* Botón principal del hero: más grande, animación de pulso */
 .btn-hero {
   background: var(--portal-green);
   color: #000;
@@ -282,21 +365,23 @@ body {
 
 .btn-hero:hover {
   background: var(--portal-glow);
-  transform: translate(-2px, -2px);
+  transform: translate(-2px, -2px);   /* se levanta al hacer hover */
   box-shadow: 8px 8px 0 #000;
 }
 
+/* Pulso de brillo verde alrededor del botón hero */
 @keyframes pulse-glow {
   0%, 100% { box-shadow: 6px 6px 0 #000, 0 0 0 0 rgba(0, 230, 118, 0); }
   50%       { box-shadow: 6px 6px 0 #000, 0 0 20px 6px rgba(0, 230, 118, 0.4); }
 }
 
+/* Botón de las tarjetas: amarillo Morty, ocupa todo el ancho de la card */
 .btn-card {
   background: var(--morty-yellow);
   color: #000;
   font-size: 1rem;
   width: 100%;
-  margin-top: auto;
+  margin-top: auto;   /* empuja el botón al fondo de la card (flexbox) */
 }
 
 .btn-card:hover {
@@ -305,8 +390,10 @@ body {
   box-shadow: 6px 6px 0 #000;
 }
 
+
 /* ============================================================
-   CARDS SECTION
+   SECCIÓN DESTINOS / GALERÍA DE CARDS — responsabilidad: Jordi
+   Grid automático que ajusta columnas según el ancho disponible.
    ============================================================ */
 .cards-section {
   position: relative;
@@ -314,6 +401,7 @@ body {
   padding: 80px 40px;
 }
 
+/* Título de sección: azul Rick con doble sombra */
 .section-title {
   font-family: var(--font-head);
   font-size: clamp(2rem, 4vw, 3.2rem);
@@ -333,6 +421,7 @@ body {
   font-style: italic;
 }
 
+/* Grid de cards: columnas automáticas mínimo 280px */
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -343,11 +432,13 @@ body {
   padding: 0;
 }
 
+/* display: contents hace que el <li> no genere caja propia,
+   permitiendo que el <article> participe directamente en el grid */
 .cards-grid > li {
   display: contents;
 }
 
-/* ---------- Base card ---------- */
+/* Base de todas las tarjetas */
 .card {
   background: var(--card-bg);
   border: 3px solid #000;
@@ -362,6 +453,7 @@ body {
   overflow: hidden;
 }
 
+/* Capa de color de acento por detrás del contenido: opacidad muy baja */
 .card::before {
   content: '';
   position: absolute;
@@ -369,14 +461,16 @@ body {
   border-radius: var(--radius-card);
   opacity: 0.07;
   pointer-events: none;
-  background: var(--card-accent, var(--portal-green));
+  background: var(--card-accent, var(--portal-green));   /* fallback si no hay --card-accent */
 }
 
+/* Al pasar el ratón, la card "salta" hacia arriba-izquierda */
 .card:hover {
   transform: translate(-4px, -4px);
   box-shadow: 10px 10px 0 #000;
 }
 
+/* Emoji grande en la parte superior de cada card */
 .card-emoji {
   font-size: 3rem;
   line-height: 1;
@@ -393,6 +487,8 @@ body {
   line-height: 1.2;
 }
 
+/* flex-grow: 1 hace que la descripción ocupe el espacio sobrante,
+   empujando el botón siempre al fondo sin importar la longitud del texto */
 .card-desc {
   font-size: 0.92rem;
   color: var(--text-muted);
@@ -400,7 +496,9 @@ body {
   flex-grow: 1;
 }
 
-/* ---------- Card color accents ---------- */
+/* ---- Color de acento por tipo de destino ----
+   Cada modificador define --card-accent (para el ::before)
+   y sobreescribe border-color y box-shadow con el color temático */
 .card--rainbow  { --card-accent: #ff4dff; border-color: #9900cc; box-shadow: 6px 6px 0 #9900cc; }
 .card--forest   { --card-accent: #00e676; border-color: #006633; box-shadow: 6px 6px 0 #006633; }
 .card--astral   { --card-accent: #00cfff; border-color: #005577; box-shadow: 6px 6px 0 #005577; }
@@ -412,6 +510,7 @@ body {
 .card--area51   { --card-accent: #ff6b00; border-color: #7a3000; box-shadow: 6px 6px 0 #7a3000; }
 .card--sloth    { --card-accent: #b0f0b0; border-color: #3a6e3a; box-shadow: 6px 6px 0 #3a6e3a; }
 
+/* Sombra de hover alineada con el color de cada card */
 .card--rainbow:hover, .card--unicorn:hover { box-shadow: 10px 10px 0 #9900cc; }
 .card--forest:hover,  .card--respawn:hover  { box-shadow: 10px 10px 0 #006633; }
 .card--astral:hover,  .card--cosmic:hover   { box-shadow: 10px 10px 0 #005577; }
@@ -420,8 +519,11 @@ body {
 .card--area51:hover                          { box-shadow: 10px 10px 0 #7a3000; }
 .card--sloth:hover                           { box-shadow: 10px 10px 0 #3a6e3a; }
 
+
 /* ============================================================
-   ABOUT SECTION
+   SECCIÓN SOBRE NOSOTROS — responsabilidad: Edgar
+   Fondo degradado para diferenciarla visualmente del resto.
+   El OVNI se posiciona en absoluto dentro de esta sección.
    ============================================================ */
 .about-section {
   position: relative;
@@ -433,13 +535,15 @@ body {
   overflow: hidden;
 }
 
+/* Contenedor de texto centrado con ancho máximo */
 .about-container {
   max-width: 760px;
   margin: 0 auto;
   position: relative;
-  z-index: 2;
+  z-index: 2;   /* por encima del OVNI decorativo */
 }
 
+/* Etiqueta "quiénes somos" en morado */
 .about-badge {
   display: inline-block;
   background: var(--cosmic-purple);
@@ -454,6 +558,7 @@ body {
   margin-bottom: 22px;
 }
 
+/* Título de la sección: rosa alien con sombra neón */
 .about-title {
   font-family: var(--font-head);
   font-size: clamp(2rem, 4vw, 3rem);
@@ -471,15 +576,18 @@ body {
   margin-bottom: 16px;
 }
 
+/* Resaltado de la marca en verde portal */
 .about-text strong {
   color: var(--portal-green);
 }
 
+/* Énfasis especial en amarillo Morty */
 .about-text em {
   color: var(--morty-yellow);
   font-style: normal;
 }
 
+/* Lista de estadísticas en fila */
 .about-stats {
   display: flex;
   gap: 32px;
@@ -487,11 +595,12 @@ body {
   flex-wrap: wrap;
 }
 
+/* Cada bloque estadística con fondo semitransparente */
 .stat {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0, 0, 0, 0.4);
   border: 3px solid #000;
   border-radius: 16px;
   padding: 18px 28px;
@@ -499,7 +608,8 @@ body {
   min-width: 140px;
 }
 
-/* dd en HTML, aparece visualmente arriba con order */
+/* <dd> en el HTML — aparece visualmente ARRIBA gracias a order: 1
+   (el HTML pone dt antes que dd, pero CSS los invierte visualmente) */
 .stat-num {
   font-family: var(--font-head);
   font-size: 2.6rem;
@@ -511,7 +621,7 @@ body {
   order: 1;
 }
 
-/* dt en HTML, aparece visualmente abajo */
+/* <dt> en el HTML — aparece visualmente ABAJO como etiqueta */
 .stat-label {
   font-size: 0.8rem;
   color: var(--text-muted);
@@ -522,7 +632,7 @@ body {
   order: 2;
 }
 
-/* UFO decoration in about section */
+/* OVNI decorativo: flota en la parte derecha de la sección */
 .about-ufo {
   position: absolute;
   right: 80px;
@@ -536,6 +646,7 @@ body {
 
 .ufo-body { position: relative; }
 
+/* Cúpula transparente del OVNI con degradado azul */
 .ufo-dome {
   width: 70px;
   height: 40px;
@@ -543,20 +654,22 @@ body {
   border: 3px solid #000;
   border-radius: 50% 50% 0 0;
   margin: 0 auto;
-  box-shadow: inset 0 4px 12px rgba(255,255,255,0.3);
+  box-shadow: inset 0 4px 12px rgba(255, 255, 255, 0.3);
 }
 
+/* Platillo: elipse gris más ancha que la cúpula */
 .ufo-base {
   width: 120px;
   height: 30px;
   background: linear-gradient(180deg, #888 0%, #555 100%);
   border: 3px solid #000;
   border-radius: 50%;
-  margin-top: -4px;
+  margin-top: -4px;   /* se superpone ligeramente a la cúpula */
   box-shadow: 0 6px 20px rgba(0, 207, 255, 0.5);
   position: relative;
 }
 
+/* Luces del platillo: dos círculos parpadeantes con pseudo-elementos */
 .ufo-base::before,
 .ufo-base::after {
   content: '';
@@ -573,8 +686,9 @@ body {
 }
 
 .ufo-base::before { left: 20px; }
-.ufo-base::after  { right: 20px; animation-delay: 0.6s; }
+.ufo-base::after  { right: 20px; animation-delay: 0.6s; }   /* luz alterna desfasada */
 
+/* Rayo tractor: triángulo CSS difuminado */
 .ufo-beam {
   width: 0;
   height: 0;
@@ -587,18 +701,21 @@ body {
   animation: beam-pulse 2s ease-in-out infinite;
 }
 
+/* El rayo parpadea para simular actividad */
 @keyframes beam-pulse {
   0%, 100% { opacity: 0.5; }
   50%       { opacity: 1; }
 }
 
+/* Parpadeo de las luces del platillo */
 @keyframes blink {
   from { opacity: 0.4; }
   to   { opacity: 1; }
 }
 
+
 /* ============================================================
-   FOOTER
+   PIE DE PÁGINA — responsabilidad: Edgar
    ============================================================ */
 .footer {
   position: relative;
@@ -609,30 +726,62 @@ body {
   background: rgba(0, 0, 0, 0.6);
 }
 
+/* Bloque de información de contacto (<address> en el HTML) */
+.footer-contact {
+  font-style: normal;   /* <address> es italic por defecto; lo reseteamos */
+  margin-bottom: 16px;
+}
+
+.footer-contact p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+
+/* Enlace de email dentro del footer */
+.footer-link {
+  color: var(--portal-green);
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+}
+
 .footer p {
   color: var(--text-muted);
   font-size: 0.9rem;
   margin-bottom: 6px;
 }
 
+/* Nota legal / disclaimer en tamaño más pequeño y semitransparente */
 .footer-sub {
   font-size: 0.78rem !important;
   opacity: 0.5;
   font-style: italic;
 }
 
+
 /* ============================================================
-   SHARED ANIMATIONS
+   ANIMACIONES COMPARTIDAS — responsabilidad: Roger
    ============================================================ */
+
+/* Levitación suave: usada en badge, alien, OVNI y más */
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50%       { transform: translateY(-12px); }
 }
 
+
 /* ============================================================
-   RESPONSIVE
+   DISEÑO RESPONSIVO
+   Breakpoints: tablet (≤768px) y móvil pequeño (≤480px).
+   Mobile-first: estos estilos sobreescriben el diseño base
+   para pantallas más pequeñas.
    ============================================================ */
 @media (max-width: 768px) {
+
+  /* Navbar: apilado vertical en móvil */
   .navbar {
     flex-direction: column;
     gap: 8px;
@@ -640,18 +789,27 @@ body {
     text-align: center;
   }
 
+  /* Lista de nav: centrada en móvil */
+  .nav-links {
+    gap: 16px;
+    justify-content: center;
+  }
+
   .nav-tagline { text-align: center; font-size: 0.78rem; }
 
   .hero { padding: 60px 20px 50px; }
 
+  /* Alienígena oculto en móvil para no solapar el texto del hero */
   .hero-alien { display: none; }
 
   .cards-section { padding: 60px 20px; }
 
+  /* Una sola columna en móvil */
   .cards-grid { grid-template-columns: 1fr; }
 
   .about-section { padding: 60px 20px; }
 
+  /* OVNI oculto en móvil: no hay espacio sin solapar el texto */
   .about-ufo { display: none; }
 
   .about-stats { justify-content: center; }
@@ -660,6 +818,7 @@ body {
 }
 
 @media (max-width: 480px) {
+  /* Título del hero más pequeño en pantallas muy estrechas */
   .hero-title { font-size: 2.2rem; }
   .btn-hero   { font-size: 1.1rem; padding: 14px 28px; }
 }

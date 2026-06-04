@@ -4,37 +4,82 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Weed World 🛸</title>
+
+  <!-- Preconexión a Google Fonts para mejorar rendimiento de carga -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Fuente de títulos (Bangers) y cuerpo (Nunito) — instaladas por Boris -->
   <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet" />
+
+  <!-- Hoja de estilos principal -->
   <link rel="stylesheet" href="src/styles.css" />
 </head>
 <body>
 
-  <!-- Decoración de fondo (solo visual) -->
+  <!-- Capas de estrellas animadas: solo decorativas, ocultas a lectores de pantalla -->
   <div class="stars" aria-hidden="true"></div>
   <div class="stars2" aria-hidden="true"></div>
 
-  <!-- CABECERA DEL SITIO -->
+  <!-- =============================================
+       CABECERA DEL SITIO — responsabilidad: Boris
+       Contiene el logotipo y la navegación principal
+       ============================================= -->
   <header class="site-header">
+
+    <!-- nav: bloque de navegación principal del sitio -->
     <nav class="navbar" aria-label="Navegación principal">
-      <a href="#" class="nav-logo">🛸 Weede World</a>
-      <p class="nav-tagline"><q>No vendemos viajes. Vendemos historias que contar.</q></p>
+
+      <!-- Logotipo / enlace de vuelta al inicio -->
+      <a href="#" class="nav-logo">🛸 Weed World</a>
+
+      <!-- Lista de enlaces de navegación hacia las secciones del sitio -->
+      <ul class="nav-links" role="list">
+        <li><a href="#destinos" class="nav-link">Destinos</a></li>
+        <li><a href="#about"    class="nav-link">Sobre nosotros</a></li>
+        <li><a href="#contacto" class="nav-link">Contacto</a></li>
+      </ul>
+
+      <!-- Eslogan de la empresa (cita decorativa) -->
+      <p class="nav-tagline">
+        <q>No vendemos viajes. Vendemos historias que contar.</q>
+      </p>
+
     </nav>
   </header>
 
-  <!-- CONTENIDO PRINCIPAL -->
+  <!-- =============================================
+       CONTENIDO PRINCIPAL DEL SITIO
+       ============================================= -->
   <main>
 
-    <!-- HERO -->
+    <!-- ---- HERO ---- responsabilidad: Boris ----
+         Sección de bienvenida con imagen de impacto,
+         título principal y llamada a la acción       -->
     <section class="hero" aria-labelledby="hero-title">
+
+      <!-- Anillo de portal: decoración visual, sin valor semántico -->
       <div class="portal-ring" aria-hidden="true"></div>
+
+      <!-- Bloque central de texto del hero -->
       <div class="hero-content">
         <p class="hero-badge">👽 INTERDIMENSIONAL TRAVEL CO.</p>
-        <h1 class="hero-title" id="hero-title">Tu próxima realidad está a un clic de distancia</h1>
-        <p class="hero-subtitle">Viajes interdimensionales, experiencias cósmicas y aventuras que desafían las leyes de la lógica.</p>
+
+        <!-- h1: único por página, describe el propósito del sitio -->
+        <h1 class="hero-title" id="hero-title">
+          Tu próxima realidad está a un clic de distancia
+        </h1>
+
+        <p class="hero-subtitle">
+          Viajes interdimensionales, experiencias cósmicas y aventuras
+          que desafían las leyes de la lógica.
+        </p>
+
+        <!-- Llamada a la acción principal: lleva a la galería de destinos -->
         <a href="#destinos" class="btn btn-hero">🚀 Explorar Destinos</a>
       </div>
+
+      <!-- Personaje alienígena animado: puramente decorativo -->
       <div class="hero-alien" aria-hidden="true">
         <div class="alien-head">
           <div class="alien-eye left"></div>
@@ -42,14 +87,22 @@
           <div class="alien-mouth"></div>
         </div>
       </div>
+
     </section>
 
-    <!-- DESTINOS -->
+    <!-- ---- GALERÍA DE DESTINOS ---- responsabilidad: Jordi ----
+         Cuadrícula de tarjetas (cards) con los viajes disponibles.
+         Cada tarjeta es un <article> dentro de un ítem de lista <li>  -->
     <section class="cards-section" id="destinos" aria-labelledby="destinos-title">
+
       <h2 class="section-title" id="destinos-title">🛸 Tarjetas de viajes</h2>
       <p class="section-subtitle">Destinos donde Google Maps ni siquiera ha oído hablar</p>
 
+      <!-- Lista no ordenada de destinos: semánticamente una colección de ítems -->
       <ul class="cards-grid">
+
+        <!-- Cada <li> contiene un <article> porque cada tarjeta es
+             un bloque de contenido independiente y auto-contenido    -->
 
         <li>
           <article class="card card--rainbow">
@@ -104,6 +157,7 @@
             <button class="btn btn-card" type="button">Abrir Portal 🔮</button>
           </article>
         </li>
+
         <li>
           <article class="card card--respawn">
             <p class="card-emoji" aria-hidden="true">🎮</p>
@@ -134,15 +188,23 @@
       </ul>
     </section>
 
-    <!-- SOBRE NOSOTROS -->
+    <!-- ---- SOBRE NOSOTROS ---- responsabilidad: Edgar ----
+         Sección informativa con la misión y valores de la empresa.
+         <dl> (description list) agrupa los datos estadísticos
+         porque representan pares término–valor                    -->
     <section class="about-section" id="about" aria-labelledby="about-title">
+
       <div class="about-container">
         <p class="about-badge">👽 QUIÉNES SOMOS</p>
         <h2 class="about-title" id="about-title">Nuestra misión</h2>
+
+        <!-- Texto descriptivo de la empresa -->
         <div class="about-text">
           <p>En <strong>Weed World</strong> creemos que los mejores viajes no siempre aparecen en Google Maps. Diseñamos experiencias extraordinarias para exploradores curiosos, soñadores profesionales y personas que responden <em>"depende"</em> cuando les preguntan si están bien.</p>
           <p>Nuestro objetivo es ayudarte a descubrir lugares imposibles, realidades alternativas y aventuras que harán que tus vacaciones en la playa parezcan el tutorial del videojuego.</p>
         </div>
+
+        <!-- <dl>: lista de definiciones; ideal para estadísticas con etiqueta + valor -->
         <dl class="about-stats">
           <div class="stat">
             <dt class="stat-label">Dimensiones disponibles</dt>
@@ -158,6 +220,8 @@
           </div>
         </dl>
       </div>
+
+      <!-- OVNI decorativo: animación CSS pura, oculto a lectores de pantalla -->
       <div class="about-ufo" aria-hidden="true">
         <div class="ufo-body">
           <div class="ufo-dome"></div>
@@ -165,14 +229,27 @@
           <div class="ufo-beam"></div>
         </div>
       </div>
+
     </section>
 
   </main>
 
-  <!-- PIE DE PÁGINA -->
-  <footer class="footer">
-    <p>🛸 Wilder World © 2024 — Viajes a dimensiones que probablemente no deberías visitar.</p>
+  <!-- =============================================
+       PIE DE PÁGINA — responsabilidad: Edgar
+       <address> es el elemento semántico correcto
+       para información de contacto del autor/empresa
+       ============================================= -->
+  <footer class="footer" id="contacto">
+
+    <!-- <address>: datos de contacto de la organización -->
+    <address class="footer-contact">
+      <p>📧 <a href="mailto:hola@weedworld.com" class="footer-link">hola@weedworld.com</a></p>
+      <p>📍 Dimensión C-137, Galaxia Vía Láctea</p>
+    </address>
+
+    <p>🛸 Weed World © 2024 — Viajes a dimensiones que probablemente no deberías visitar.</p>
     <p class="footer-sub">Ningún portal fue dañado en la elaboración de este sitio. Probablemente.</p>
+
   </footer>
 
 </body>
