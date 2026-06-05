@@ -891,6 +891,196 @@ body {
 
 
 /* ============================================================
+   SECCIÓN CONTACTO — responsabilidad: Roger
+   Formulario de reserva con estética cósmica.
+   ============================================================ */
+.contact-section {
+  position: relative;
+  z-index: 1;
+  padding: 90px 40px;
+  background: linear-gradient(135deg, #080d1e 0%, #0d0820 100%);
+  border-top: 3px solid var(--rick-blue);
+  border-bottom: 3px solid var(--rick-blue);
+  overflow: hidden;
+}
+
+.contact-container {
+  max-width: 680px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.contact-badge {
+  display: inline-block;
+  background: var(--rick-blue);
+  color: #000;
+  font-family: var(--font-head);
+  font-size: 0.95rem;
+  letter-spacing: 3px;
+  padding: 6px 18px;
+  border-radius: 30px;
+  border: 3px solid #000;
+  box-shadow: 3px 3px 0 #000;
+  margin-bottom: 22px;
+}
+
+.contact-title {
+  font-family: var(--font-head);
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: 2px;
+  color: var(--morty-yellow);
+  text-shadow: 3px 3px 0 #000, 0 0 20px var(--morty-yellow);
+  -webkit-text-stroke: 1px #000;
+  margin-bottom: 12px;
+}
+
+.contact-subtitle {
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 40px;
+  font-style: italic;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* Fila de dos columnas para nombre + email */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.form-label {
+  font-family: var(--font-head);
+  font-size: 1rem;
+  letter-spacing: 1px;
+  color: var(--rick-blue);
+  text-shadow: 0 0 8px rgba(0, 207, 255, 0.35);
+}
+
+.form-input {
+  background: rgba(16, 16, 42, 0.9);
+  color: var(--white);
+  border: 2px solid var(--card-border);
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  width: 100%;
+}
+
+.form-input::placeholder {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.form-input:focus {
+  border-color: var(--rick-blue);
+  box-shadow: 0 0 0 3px rgba(0, 207, 255, 0.12), 0 0 14px rgba(0, 207, 255, 0.2);
+}
+
+/* Select: flecha personalizada, sin flecha nativa del navegador */
+.form-select {
+  appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M6 8L0 0h12z' fill='%238888bb'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+
+.form-select option {
+  background: #10102a;
+  color: var(--white);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.6;
+}
+
+.btn-contact {
+  background: var(--rick-blue);
+  color: #000;
+  font-size: 1.15rem;
+  align-self: flex-start;
+  box-shadow: 5px 5px 0 #000;
+}
+
+.btn-contact:hover {
+  background: #33d8ff;
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0 #000;
+}
+
+/* ---- Planeta decorativo (CSS puro) ---- */
+.contact-planet {
+  position: absolute;
+  right: 90px;
+  top: 50%;
+  transform: translateY(-50%);
+  animation: float 7s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.55;
+}
+
+.planet-body {
+  position: relative;
+  width: 110px;
+  height: 110px;
+  background: radial-gradient(circle at 38% 35%, #5a4aed 0%, #1a086e 70%);
+  border-radius: 50%;
+  border: 3px solid #000;
+  box-shadow:
+    0 0 40px rgba(124, 58, 237, 0.5),
+    inset -14px -14px 24px rgba(0, 0, 0, 0.6);
+  overflow: visible;
+}
+
+/* Anillo del planeta: elipse CSS girada con perspectiva */
+.planet-ring {
+  position: absolute;
+  width: 170px;
+  height: 40px;
+  border: 5px solid transparent;
+  border-top-color: rgba(124, 58, 237, 0.7);
+  border-bottom-color: rgba(124, 58, 237, 0.7);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotateX(68deg);
+  box-shadow: 0 0 14px rgba(124, 58, 237, 0.4);
+}
+
+/* Cráteres del planeta */
+.planet-crater {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.crater-a { width: 22px; height: 22px; top: 22px; left: 30px; }
+.crater-b { width: 14px; height: 14px; top: 55px; left: 60px; }
+
+
+/* ============================================================
    ANIMACIONES COMPARTIDAS — responsabilidad: Roger
    ============================================================ */
 
@@ -939,6 +1129,17 @@ body {
 
   /* OVNI oculto en móvil: no hay espacio sin solapar el texto */
   .about-ufo { display: none; }
+
+  .contact-section { padding: 60px 20px; }
+
+  /* Dos inputs apilados en móvil */
+  .form-row { grid-template-columns: 1fr; }
+
+  /* Planeta oculto: ocupa demasiado espacio sin el ancho suficiente */
+  .contact-planet { display: none; }
+
+  /* Botón ocupa todo el ancho en móvil */
+  .btn-contact { align-self: stretch; text-align: center; }
 
   .about-stats { justify-content: center; }
 
