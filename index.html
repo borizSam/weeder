@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+code $HOME\.claude\config.json<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -38,6 +38,7 @@
         <li><a href="#destinos" class="nav-link">Destinos</a></li>
         <li><a href="#about"    class="nav-link">Sobre nosotros</a></li>
         <li><a href="#contacto" class="nav-link">Contacto</a></li>
+        <li><a href="login.html" class="nav-link">Iniciar Sesión</a></li>
       </ul>
 
       <!-- Eslogan de la empresa (cita decorativa) -->
@@ -89,6 +90,131 @@
       </div>
 
     </section>
+    <section class="account-section" aria-labelledby="account-title">
+      <h2 class="section-title" id="account-title">👽 Tu cuenta</h2>
+      <p class="section-subtitle">Actividad reciente y opciones de perfil</p>
+
+      <div class="account-container">
+        <!-- Avatar y nombre de usuario -->
+        <div class="account-header">
+          <div class="account-avatar" aria-hidden="true">👽</div>
+          <div class="account-info">
+            <h3 class="account-name">UsuarioEjemplo</h3>
+            <p class="account-status">Último acceso: hace 2 horas</p>
+          </div>
+        </div>
+
+        <!-- Actividades recientes -->
+        <div class="account-activities">
+          <h4 class="activities-title">Actividad reciente</h4>
+          <ul class="activities-list">
+            <li class="activity-item">🚀 Exploraste Rainbow Lag Simulator</li>
+            <li class="activity-item">🌙 Visitaste Astral Airlines Premium</li>
+            <li class="activity-item">🍫 Probaste Chocolate Quantum Experience</li>
+            <li class="activity-item">🦥 Relax en Slow Motion Paradise</li>
+          </ul>
+        </div>
+
+        <!-- Botones de acción (cerrar sesión, editar perfil) -->
+        <div class="account-actions">
+          <a href="#" class="btn btn-outline">Cerrar sesión</a>
+          <a href="#" class="btn btn-outline">Editar perfil</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==== FORMULARIO DE INICIO DE SESIÓN / REGISTRO ==== -->
+    <section class="auth-section" aria-labelledby="auth-title">
+      <h2 class="section-title" id="auth-title">🔐 Acceso al portal</h2>
+      <p class="section-subtitle">Inicia sesión o crea una nueva cuenta para continuar explorando dimensiones</p>
+
+      <!-- Tabs para cambiar entre login y register -->
+      <div class="auth-tabs">
+        <button class="tab-btn active" data-tab="login">Iniciar Sesión</button>
+        <button class="tab-btn" data-tab="register">Registrarse</button>
+      </div>
+
+      <!-- Contenedor que mostrará el formulario activo -->
+      <div class="auth-forms">
+        <!-- Formulario de inicio de sesión -->
+        <form class="auth-form active" id="login-form" aria-label="Formulario de inicio de sesión">
+          <div class="form-group">
+            <label for="login-email">Correo electrónico</label>
+            <input type="email" id="login-email" name="email" placeholder="tu@email.com" required />
+          </div>
+          <div class="form-group">
+            <label for="login-password">Contraseña</label>
+            <input type="password" id="login-password" name="password" placeholder="••••••••" required />
+          </div>
+          <div class="form-group form-check">
+            <input type="checkbox" id="login-remember" name="remember" />
+            <label for="login-remember">Recordarme</label>
+          </div>
+          <button type="submit" class="btn btn-hero">Ingresar al portal</button>
+          <p class="form-footer">
+            ¿Olvidaste tu contraseña? <a href="#">Recuperarla</a>
+          </p>
+        </form>
+
+        <!-- Formulario de registro -->
+        <form class="auth-form" id="register-form" aria-label="Formulario de registro">
+          <div class="form-group">
+            <label for="register-name">Nombre de usuario</label>
+            <input type="text" id="register-name" name="username" placeholder="Tu nombre cósmico" required />
+          </div>
+          <div class="form-group">
+            <label for="register-email">Correo electrónico</label>
+            <input type="email" id="register-email" name="email" placeholder="tu@email.com" required />
+          </div>
+          <div class="form-group">
+            <label for="register-password">Contraseña</label>
+            <input type="password" id="register-password" name="password" placeholder="••••••••" minlength="6" required />
+          </div>
+          <div class="form-group">
+            <label for="register-password2">Confirmar contraseña</label>
+            <input type="password" id="register-password2" name="password2" placeholder="••••••••" minlength="6" required />
+          </div>
+          <div class="form-group form-check">
+            <input type="checkbox" id="register-terms" name="terms" required />
+            <label for="register-terms">Acepto los términos y condiciones y política de privacidad</label>
+          </div>
+          <button type="submit" class="btn btn-hero">Crear cuenta y embarcarse</button>
+          <p class="form-footer">
+            Ya tienes cuenta? <a href="#" class="switch-to-login">Inicia sesión aquí</a>
+          </p>
+        </form>
+      </div>
+    </section>
+
+    <!-- Script simple para cambiar entre formularios (login/register) -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const tabs = document.querySelectorAll('.tab-btn');
+      const forms = document.querySelectorAll('.auth-form');
+      const switchLinks = document.querySelectorAll('.switch-to-login');
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          // Desactivar todas las tabs y forms
+          tabs.forEach(t => t.classList.remove('active'));
+          forms.forEach(f => f.classList.remove('active'));
+
+          // Activar la tab seleccionada
+          tab.classList.add('active');
+          const target = tab.getAttribute('data-tab');
+          document.getElementById(target + '-form').classList.add('active');
+        });
+      });
+
+      // Links que cambian al login
+      switchLinks.forEach(link => {
+        link.addEventListener('click', e => {
+          e.preventDefault();
+          document.querySelector('[data-tab="login"]').click();
+        });
+      });
+    });
+  </script>
 
     <!-- ---- GALERÍA DE DESTINOS ---- responsabilidad: Jordi ----
          Cuadrícula de tarjetas (cards) con los viajes disponibles.

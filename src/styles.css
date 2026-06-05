@@ -39,6 +39,7 @@
 }
 
 
+
 /* ============================================================
    RESET BÁSICO
    Elimina márgenes y paddings por defecto del navegador.
@@ -63,6 +64,7 @@ body {
   overflow-x: hidden;   /* evita scroll horizontal por elementos desbordados */
   position: relative;   /* necesario para que los pseudo-elementos fixed funcionen */
 }
+
 
 
 /* ============================================================
@@ -115,6 +117,7 @@ body {
   0%   { opacity: 0.6; }
   100% { opacity: 1; }
 }
+
 
 
 /* ============================================================
@@ -179,6 +182,7 @@ body {
   max-width: 360px;
   text-align: right;
 }
+
 
 
 /* ============================================================
@@ -328,6 +332,7 @@ body {
 }
 
 
+
 /* ============================================================
    BOTONES — estilos compartidos
    Estilo "flat design" con sombra desplazada tipo cómic.
@@ -389,6 +394,7 @@ body {
   transform: translate(-2px, -2px);
   box-shadow: 6px 6px 0 #000;
 }
+
 
 
 /* ============================================================
@@ -518,6 +524,7 @@ body {
 .card--galaxy:hover                          { box-shadow: 10px 10px 0 #665500; }
 .card--area51:hover                          { box-shadow: 10px 10px 0 #7a3000; }
 .card--sloth:hover                           { box-shadow: 10px 10px 0 #3a6e3a; }
+
 
 
 /* ============================================================
@@ -714,6 +721,7 @@ body {
 }
 
 
+
 /* ============================================================
    PIE DE PÁGINA — responsabilidad: Edgar
    ============================================================ */
@@ -762,6 +770,7 @@ body {
 }
 
 
+
 /* ============================================================
    ANIMACIONES COMPARTIDAS — responsabilidad: Roger
    ============================================================ */
@@ -771,6 +780,7 @@ body {
   0%, 100% { transform: translateY(0); }
   50%       { transform: translateY(-12px); }
 }
+
 
 
 /* ============================================================
@@ -821,4 +831,234 @@ body {
   /* Título del hero más pequeño en pantallas muy estrechas */
   .hero-title { font-size: 2.2rem; }
   .btn-hero   { font-size: 1.1rem; padding: 14px 28px; }
+}
+
+
+
+/* ============================================================
+   SECCIÓN DE CUENTA — responsabilidad: (quien corresponda)
+   Muestra el avatar, nombre y actividades recientes
+   ============================================================ */
+.account-section {
+  background: rgba(0,0,0,0.4);
+  border: 3px solid var(--portal-green);
+  border-radius: var(--radius-card);
+  padding: 28px 24px;
+  margin: 40px auto;
+  max-width: 800px;
+  box-shadow: 6px 6px 0 #000;
+  position: relative;
+  overflow: hidden;
+}
+.account-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-card);
+  opacity: 0.07;
+  pointer-events: none;
+  background: var(--card-accent, var(--portal-green));
+}
+.account-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.account-avatar {
+  font-size: 4rem;
+  filter: drop-shadow(2px 2px 0 #000);
+}
+.account-info {
+  flex: 1;
+}
+.account-name {
+  font-family: var(--font-head);
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+  color: var(--white);
+  text-shadow: 2px 2px 0 #000;
+  -webkit-text-stroke: 0.5px #000;
+  margin: 0;
+}
+.account-status {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+.account-activities {
+  margin-top: 24px;
+}
+.activities-title {
+  font-family: var(--font-head);
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  color: var(--rick-blue);
+  text-shadow: 2px 2px 0 #000;
+  margin-bottom: 12px;
+}
+.activities-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.activity-item {
+  font-size: 1rem;
+  color: var(--text-muted);
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.activity-item:last-child {
+  border-bottom: none;
+}
+.account-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+.btn-outline {
+  background: transparent;
+  color: var(--white);
+  border: 3px solid #000;
+}
+.btn-outline:hover {
+  background: rgba(0,0,0,0.2);
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 #000;
+}
+
+
+
+/* ============================================================
+   SECCIÓN DE AUTENTICACIÓN — responsabilidad: (quien corresponda)
+   Formulario de login y registro con tabs
+   ============================================================ */
+.auth-section {
+  background: rgba(0,0,0,0.4);
+  border: 3px solid var(--portal-green);
+  border-radius: var(--radius-card);
+  padding: 28px 24px;
+  margin: 40px auto;
+  max-width: 500px;
+  box-shadow: 6px 6px 0 #000;
+  position: relative;
+  overflow: hidden;
+}
+.auth-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-card);
+  opacity: 0.07;
+  pointer-events: none;
+  background: var(--card-accent, var(--portal-green));
+}
+.auth-tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  border-bottom: 3px solid #000;
+}
+.tab-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  padding: 8px 16px;
+  cursor: pointer;
+  position: relative;
+}
+.tab-btn.active {
+  color: var(--white);
+}
+.tab-btn.active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 3px;
+  background: var(--portal-green);
+}
+.tab-btn:hover {
+  color: var(--portal-green);
+}
+.auth-forms {
+  display: flex;
+}
+.auth-form {
+  width: 100%;
+  display: none;
+  flex-direction: column;
+  gap: 16px;
+}
+.auth-form.active {
+  display: flex;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+.form-group label {
+  font-size: 1rem;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+.form-group input {
+  background: rgba(0,0,0,0.3);
+  border: 3px solid #000;
+  border-radius: 8px;
+  color: var(--white);
+  padding: 10px 12px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+}
+.form-group input::placeholder {
+  color: var(--text-muted);
+}
+.form-group input:focus {
+  outline: none;
+  box-shadow: 0 0 8px var(--portal-green);
+  border-color: var(--portal-green);
+}
+.form-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+.form-check input {
+  width: 16px;
+  height: 16px;
+}
+.form-footer {
+  font-size: 0.9rem;
+  text-align: center;
+  margin-top: 12px;
+}
+.form-footer a {
+  color: var(--portal-green);
+  text-decoration: none;
+}
+.form-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Responsivo para formularios */
+@media (max-width: 480px) {
+  .account-section, .auth-section {
+    padding: 20px;
+    margin: 20px;
+  }
+  .account-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .tab-btn {
+    font-size: 1rem;
+    padding: 6px 12px;
+  }
 }
