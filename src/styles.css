@@ -413,6 +413,18 @@ body {
   margin-bottom: 10px;
 }
 
+/* Imagen decorativa sección tarjeta de viajes */
+.section-title-img {
+  display: block;
+  width: 280px;          /* mismo ancho mínimo de columna que las cards */
+  max-width: 100%;
+  height: auto;
+  margin: 16px auto 24px; /* centrada y con aire respecto a título y subtítulo */
+  object-fit: contain;
+  border-radius: var(--radius-card);
+  filter: drop-shadow(3px 3px 0 #000);
+}
+
 .section-subtitle {
   text-align: center;
   color: var(--text-muted);
@@ -506,18 +518,13 @@ body {
 .card--galaxy   { --card-accent: #ffe135; border-color: #665500; box-shadow: 6px 6px 0 #665500; }
 .card--unicorn  { --card-accent: #ff4dff; border-color: #880088; box-shadow: 6px 6px 0 #880088; }
 .card--cosmic   { --card-accent: #00cfff; border-color: #003366; box-shadow: 6px 6px 0 #003366; }
-.card--respawn  { --card-accent: #00e676; border-color: #007744; box-shadow: 6px 6px 0 #007744; }
-.card--area51   { --card-accent: #ff6b00; border-color: #7a3000; box-shadow: 6px 6px 0 #7a3000; }
-.card--sloth    { --card-accent: #b0f0b0; border-color: #3a6e3a; box-shadow: 6px 6px 0 #3a6e3a; }
 
 /* Sombra de hover alineada con el color de cada card */
 .card--rainbow:hover, .card--unicorn:hover { box-shadow: 10px 10px 0 #9900cc; }
-.card--forest:hover,  .card--respawn:hover  { box-shadow: 10px 10px 0 #006633; }
-.card--astral:hover,  .card--cosmic:hover   { box-shadow: 10px 10px 0 #005577; }
-.card--choco:hover                           { box-shadow: 10px 10px 0 #7a3500; }
-.card--galaxy:hover                          { box-shadow: 10px 10px 0 #665500; }
-.card--area51:hover                          { box-shadow: 10px 10px 0 #7a3000; }
-.card--sloth:hover                           { box-shadow: 10px 10px 0 #3a6e3a; }
+.card--forest:hover                        { box-shadow: 10px 10px 0 #006633; }
+.card--astral:hover,  .card--cosmic:hover  { box-shadow: 10px 10px 0 #005577; }
+.card--choco:hover                         { box-shadow: 10px 10px 0 #7a3500; }
+.card--galaxy:hover                        { box-shadow: 10px 10px 0 #665500; }
 
 
 /* ============================================================
